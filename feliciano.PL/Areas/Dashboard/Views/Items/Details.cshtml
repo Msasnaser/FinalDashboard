@@ -1,0 +1,33 @@
+﻿@model IndexItemVM
+
+@section Header {
+    ALL DETAILS
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-black text-white">
+                    <h5 class="mb-0">Item Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <img src="~/files/ItemImages/@Model.ImageName" class="img-fluid" alt="Item Image" style="width: 100%; height: auto; max-width: 150px;" />
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="text-danger" style="font-weight: bold; font-family: cursive;">Portfolio Section:</h4>
+                            <p style="font-size:25px;">@Model.PortfolioName</p>
+                            <h4 class="text-danger" style="font-weight: bold; font-family: cursive;">Created At:</h4>
+                            <p style="font-size:25px;">@Model.CreatedTime</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

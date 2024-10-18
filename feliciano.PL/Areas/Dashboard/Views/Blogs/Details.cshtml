@@ -1,0 +1,30 @@
+﻿@model DetailsBlogVM
+@section Header {
+    ALL DETAILS
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4 offset-md-2">
+            <div class="card">
+                <img src="~/files/BlogImages/@Model.ImageName" class="card-img-top" alt="Blog Image" style="max-width: 360px; object-fit: cover;" />
+
+                <div class="card-body">
+                    <h5 class="card-title text-danger" style="font-weight: bold; font-family: cursive;">Description :</h5>
+                    <p class="card-text" style="font-size:25px;">@Model.Description</p>
+                   
+
+                    <h6 class="text-danger" style="font-weight: bold; font-family: cursive;">
+                        Status:
+                        <span class="badge @(Model.IsDeleted ? "bg-danger" : "bg-success")" style="font-size:15px;">
+                            @(Model.IsDeleted ? "Deleted" : "Active")
+                        </span>
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

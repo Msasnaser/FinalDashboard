@@ -6,6 +6,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <head>
   <partial name="_head" />
+  @RenderSection("style", required:false)
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -28,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">@RenderSection("Header" , required :true)</h1>
+         <h1 class="m-0 text-dark" style="letter-spacing:3px;font-family: fangsong;">@RenderSection("Header", required: true)</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -73,6 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- jQuery -->
 <partial name="_scripts"/>
+@RenderSection("script", required: false);
 </body>
 </html>
 

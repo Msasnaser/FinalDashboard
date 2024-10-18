@@ -1,0 +1,34 @@
+﻿@model PortfolioVM
+
+@section Header {
+    CREATE PORTFOLIO
+}
+<div class="col-md-6 ms-4">
+    <div class="card card-primary">
+        <div class="card-header bg-dark">
+            <h3 class="card-title">Create</h3>
+        </div>
+
+        <form asp-controller="Portfolios" asp-action="Create" id="CreatePortfolioForm">
+            <div class="card-body">
+                <div class="form-group">
+                    <label asp-for="Name">Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter portfolio Name" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatedTime">Date</label>
+                    <input asp-for="CreatedTime" class="form-control" />
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-dark btn">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+

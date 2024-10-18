@@ -1,6 +1,8 @@
-using feliciano.PL.Data;
+using feliciano.DAL.Data;
+using feliciano.PL.Mapping;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace feliciano.PL
 {
@@ -19,6 +21,7 @@ namespace feliciano.PL
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+            builder.Services.AddAutoMapper ( Assembly.GetAssembly(typeof(MappingProfile)));
 
             var app = builder.Build();
 

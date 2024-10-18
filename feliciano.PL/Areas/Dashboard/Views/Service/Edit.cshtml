@@ -1,0 +1,69 @@
+﻿@model ServiceVM
+
+@section Header {
+    EDIT SERVICE
+}
+
+<div class="col-md-8 ms-4">
+    <div class="card card-primary">
+        <form id="editServiceForm" asp-controller="Service" asp-action="Edit">
+            <div class="card-body">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="Name">Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter Service Name" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description">Description</label>
+                    <input asp-for="Description" class="form-control" placeholder="Description">
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="IsDeleted">Status</label>
+                    <div>
+                        <input type="radio" asp-for="IsDeleted" value="false" id="statusActive">
+                        <label for="statusActive">Active</label>
+                    </div>
+                    <div>
+                        <input type="radio" asp-for="IsDeleted" value="true" id="statusDeleted">
+                        <label for="statusDeleted">Deleted</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-outline-dark">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section script {
+    <script >
+        document.getElementById('editServiceForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            Swal.fire({
+                title: "Do you want to save the changes?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Save",
+                denyButtonText: `Don't save`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, submit the form
+                    Swal.fire("Saved!", "", "success").then(() => {
+                        this.submit(); // Submit the form after the alert
+                    });
+                } else if (result.isDenied) {
+                    // If denied, show info message
+                    Swal.fire("Changes are not saved", "", "info");
+                }
+            });
+        });
+    </script>
+}
+
+
+

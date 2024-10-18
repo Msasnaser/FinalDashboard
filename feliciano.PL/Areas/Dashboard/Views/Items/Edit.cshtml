@@ -1,0 +1,85 @@
+﻿@model ItemFormVM
+
+@section Header {
+    EDIT ITEM
+}
+
+<div class="col-md-8 ms-4">
+    <div class="card card-primary">
+        <form id="editItemForm" asp-controller="Items" asp-action="Edit" enctype="multipart/form-data">
+            <div class="card-body">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="ImageName" />
+               
+               
+                <div class="form-group">
+                    <label asp-for="CreatedTime">CreateAt</label>
+                    <input asp-for="CreatedTime" class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label asp-for="Image">Image</label>
+                    <input asp-for="Image" class="form-control-file" type="file">
+                </div>
+                <div class="form-group">
+                    <img src="#" class="ImagePreview" style="display:none" width="80px" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="PortfolioId">Select Portfolio</label>
+                    <select asp-for="PortfolioId" class="form-control" asp-items="Model.protfolios"></select>
+                    @*                      <select asp-for="PortfolioId" class="form-control" asp-items=@(new SelectList(Model.protfolios,"Id","Name"))></select>
+                    *@
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-outline-dark">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section script {
+    <script>
+        document.querySelector(".Image").addEventListener("change", (e) => {
+            //without files it give the tag
+            const file = e.target.files[0];
+            const ImagePreview = document.querySelector(".ImagePreview");
+            if (file) {
+                // to get the file we work it
+                const reder = new FileReader();
+                reder.onload = function (ee) {
+                    //inside the ee.target we hane an information about the image
+
+                    ImagePreview.src = ee.target.result;
+                    ImagePreview.style.display = "block";
+                }
+                //هاد السطر عشان الفنكشن لنا نعمل لود يشتغل
+                reder.readAsDataURL(file);
+            }
+            console.log(e.target.files);
+        })
+
+        document.getElementById('editItemForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            Swal.fire({
+                title: "Do you want to save the changes?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Save",
+                denyButtonText: `Don't save`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, submit the form
+                    Swal.fire("Saved!", "", "success").then(() => {
+                        this.submit(); // Submit the form after the alert
+                    });
+                } else if (result.isDenied) {
+                    // If denied, show info message
+                    Swal.fire("Changes are not saved", "", "info");
+                }
+            });
+        });
+    </script>
+}
+

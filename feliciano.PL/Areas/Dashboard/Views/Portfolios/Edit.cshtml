@@ -1,0 +1,54 @@
+﻿@model PortfolioVM
+
+@section Header {
+    EDIT PORTFOLIO
+}
+
+<div class="col-md-8 ms-4">
+    <div class="card card-primary">
+        <form id="editPortfolioForm" asp-controller="Portfolios" asp-action="Edit">
+            <div class="card-body">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="Name">Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter Portfolio Name" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatedTime">Date</label>
+                    <input asp-for="CreatedTime" class="form-control" />
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-outline-dark">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section script {
+    <script>
+        document.getElementById('editPortfolioForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            Swal.fire({
+                title: "Do you want to save the changes?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Save",
+                denyButtonText: `Don't save`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, submit the form
+                    Swal.fire("Saved!", "", "success").then(() => {
+                        this.submit(); // Submit the form after the alert
+                    });
+                } else if (result.isDenied) {
+                    // If denied, show info message
+                    Swal.fire("Changes are not saved", "", "info");
+                }
+            });
+        });
+    </script>
+}

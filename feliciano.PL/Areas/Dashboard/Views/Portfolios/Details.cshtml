@@ -1,0 +1,23 @@
+﻿@model PortfolioVM
+@section Header {
+    ALL DETAILS
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-black text-white">
+                    <h5 class="card-title">Portfolio Details</h5>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-danger" style="font-weight: bold; font-family: cursive;">Name :</h5><br />
+                    <span style="font-size:25px;">@Model.Name</span>
+                    <h5 class="card-text text-danger" style="font-weight: bold; font-family: cursive;">Created Time: </h5>
+                    <span style="font-size:25px;">@Model.CreatedTime</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
