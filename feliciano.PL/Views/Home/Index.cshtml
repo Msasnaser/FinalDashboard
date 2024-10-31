@@ -1,10 +1,335 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
+	var blog = ViewData["blog"] as List<feliciano.DAL.Model.Blog>;
+	var service = ViewData["service"] as List<feliciano.DAL.Model.Service>;
+	var item = ViewData["items"] as List<feliciano.DAL.Model.Item>;
+	var slider = ViewData["slider"] as List<feliciano.DAL.Model.Slider>;
+
 }
 
-<div class="container mt-5 text-center">
-    <h1 class="display-4">Welcome to Our Site!</h1> 
-</div>
+<link href="~/css/index.css" rel="stylesheet" />
+
+ <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+
+<section class="slider-section mt-4">
+	<!-- Swiper Container -->
+	<div class="swiper-container">
+		@if(slider!=null && slider.Any() )
+		{
+		  <div class="swiper-wrapper">
+			 
+			  @foreach (var sliders in slider)
+			  {
+				<div class="swiper-slide slider-item">
+					<div class="slider-image-wrapper">
+						<img src="~/files/SliderImages/@sliders.ImageName" alt="@sliders.Title" class="slider-image" />
+						<div class="slider-title">
+							<h2>@sliders.Title</h2>
+						</div>
+					</div>
+				</div>
+
+			  }			
+		</div>
+
+		<!-- Swiper Arrows for Navigation -->
+		<div class="swiper-button-next">
+			<i class="icon icon-chevron-thin-right"></i> <!-- Right arrow -->
+		</div>
+		<div class="swiper-button-prev">
+			<i class="icon icon-chevron-thin-left"></i> <!-- Left arrow -->
+         </div>
+        }
+        else
+        {
+			<h4 class="p-3 mt-3">@(slider != null ? $"Slider Count: {slider.Count}" : "Slider is null")</h4>
+        }
+        </div>
+       
+</section>
+
+
+
+
+
+
+<section id="about" class="scrollspy-section padding-xlarge mt-5">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-header">
+					<div class="title">
+						<span>who are we</span>
+					</div>
+					<h2 class="section-title">About Us</h2>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+            <div class="col-md-6">
+				<figure class="jarallax-keep-img">
+					<img src="~/images/singleimage.jpg" alt="about us" class="jarallax-img single-image">
+				</figure>
+			</div>
+			<div class="col-md-6 description text-lead">
+				<p>
+					<strong>
+						Amet, consectetur adipiscing elit. Commodo viverra eu volutpat amet, leo ultrici non
+						senectus odio dolor. Id at urna non porttitor elentum. Viverra senectus lorem ipsum dolor
+						sit adui ultricies dolor varius nibh velit viverra euen.
+					</strong>
+				</p>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo viverra eu volutpat amet, leo
+					non senetus odio dolor. Id at urna non portitor etum. Vivera senectus elit dui ultricies dolor.
+					Varius nibh velit pellentesque sapien, sapien neque dignissim.
+				</p>
+				<p>
+					Commodo vivera eu volutpat amet, leo non senectus odio dolor. Id at urna non porttitor elementum.
+					Viverra senectus dui ultricies dolor.
+				</p>
+
+				<div class="btn-wrap">
+					<a href="#" class="btn btn-accent btn-xlarge btn-rounded">View my portfolio</a>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</section>
+
+<section id="portfolio" class="scrollspy-section bg-dark padding-large mt-5">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-header">
+					<div class="title">
+						<span>Some of Our Works</span>
+					</div>
+					<h2 class="section-title light">Our Portfolio</h2>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div id="filters" class="button-group d-flex flex-wrap gap-4 py-5" data-aos="fade-up">
+				@foreach (var portfolio in ViewData["portfolio"] as List<feliciano.DAL.Model.Portfolio>)
+				{
+					<!-- Adding data-portfolio-id to the button -->
+					<a href="#" class="btn btn-outline-light rounded-pill text-uppercase port-btn" data-portfolio-id="@portfolio.Id">
+						@portfolio.Name
+					</a>
+				}
+			</div>
+		</div>
+		<div class="grid p-0 clearfix row row-cols-2 row-cols-lg-3 row-cols-xl-3" data-aos="fade-up">
+			@if (item != null && item.Any())
+			{
+				@foreach (var items in item)
+				{
+					<!-- Adding data-portfolio-id to the portfolio item -->
+					<div class="col mb-4 portfolio-item" data-portfolio-id="@items.PortfolioId">
+						<a href="@Url.Content($"~/files/ItemImages/portfolio-large-{items.Id}.jpg")" class="image-link"
+						   title="Portfolio Item @items.Id">
+							<img src="@Url.Content($"~/files/ItemImages/{items.ImageName}")" class="img-fluid" alt="portfolio">
+						</a>
+					</div>
+				}
+			}
+			else
+			{
+				<h4 class="bg-white">No Item ..</h4>
+			}
+		</div>
+	</div>
+</section>
+
+
+<section id="services" class="scrollspy-section padding-large mt-5">
+	<div class="container">
+		<div class="row">
+			<div class="section-header col-12">
+				<div class="title">
+					<span>what we do</span>
+				</div>
+				<h2 class="section-title">Services</h2>
+			</div>
+
+		</div>
+
+		<div class="row">
+			@if(service!=null && service.Any()){
+				int ServNum = 1;
+				@foreach (var serv in service)
+			{
+			  <div class="col-md-4">
+				  <div class="services-item">
+				    <span class="number">@ServNum</span>
+				    <h3>@serv.Name</h3>
+				    <p>@serv.Description</p>
+				  </div>
+			  </div>
+					ServNum++;
+				}
+			}
+			else
+			{
+				<h4>No Service..</h4>
+			}
+
+		</div>
+
+	</div>
+</section>
+
+<section id="subscribe" class="scrollspy-section padding-small mt-5">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<figure class="subscribe-image">
+					<img src="~/images/subscribe-image.png" alt="subscribe">
+				</figure>
+			</div>
+			<div class="col-md-6">
+				<div class="subscribe-content">
+					<h2 class="section-title">subscribe us</h2>
+					<p>
+						Join our newsletter to stay updated with super discounts and amazing offers. 300+ have
+						already subscribed us.
+					</p>
+					<form id="form">
+						<input type="text" name="email" placeholder="enter your email address">
+						<button class="btn btn-accent btn-rounded btn-full btn-xlarge">Subscribe</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="latest-blog" class="scrollspy-section bg-grey padding-large mt-5">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="section-header">
+					<div class="title">
+						<span>read our blog</span>
+					</div>
+					<h2 class="section-title">latest blog</h2>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="post-grid">
+					<div class="row d-flex gap-3">
+						@if (blog != null && blog.Any())
+						{
+							@foreach (var blogs in blog)
+						{
+								<div class="col-md-4 card ">
+							<article >
+								<figure class="fig">
+									
+							<img src="@Url.Content($"~/files/BlogImages/{blogs.ImageName}")" class="img-blog " alt="portfolio">
+									
+								</figure>
+								<div>
+									<div class="meta-date">@blogs.CreateAt</div>
+									<h3 class="post-title">@blogs.Title</h3>
+									<p>@blogs.Description</p>
+								</div>
+							</article>
+
+						</div>
+							}
+						}
+						else
+						{
+							<h4>No Blog ..</h4>
+						}
+
+					</div>
+				</div>
+
+			</div>
+
+
+
+		</div>
+
+		<div class="row">
+			<div class="col">
+
+				<div class="btn-wrap align-center">
+					<a href="#" class="btn btn-xlarge btn-accent btn-rounded">View all blog</a>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</section>
+
+
+
+<script>
+	var slider = @Html.Raw(Json.Serialize(ViewData["slider"] ?? new List<feliciano.DAL.Model.Slider>()));
+
+	if (slider != null && slider.length > 0) {
+		var swiper = new Swiper('.swiper-container', {
+			slidesPerView: 1,
+			spaceBetween: 10,
+			loop: true,
+			autoplay: false,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+		});
+	}
+
+
+	document.addEventListener('DOMContentLoaded', function () {
+		// Get all portfolio buttons
+		const portfolioButtons = document.querySelectorAll('.port-btn');
+
+		// Attach click event listeners to each button
+		portfolioButtons.forEach(button => {
+			button.addEventListener('click', function (event) {
+				event.preventDefault();
+
+				// Get the portfolio ID from the clicked button
+				const portfolioId = this.getAttribute('data-portfolio-id');
+
+				// Get all portfolio items
+				const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+				// Hide all portfolio items
+				portfolioItems.forEach(item => {
+					item.style.display = 'none';
+				});
+
+				// Show only the portfolio items that match the selected portfolio ID
+				portfolioItems.forEach(item => {
+					if (item.getAttribute('data-portfolio-id') === portfolioId) {
+						item.style.display = 'block'; // or 'flex', depending on your layout
+					}
+				});
+			});
+		});
+
+		// Optionally, you can show all items when the page loads
+		// document.querySelectorAll('.portfolio-item').forEach(item => item.style.display = 'block');
+	});
+
+</script>
 
 
 

@@ -1,4 +1,5 @@
-namespace feliciano.PL.Models
+
+namespace feliciano.PL.ViewModels
 {
     public class ErrorViewModel
     {

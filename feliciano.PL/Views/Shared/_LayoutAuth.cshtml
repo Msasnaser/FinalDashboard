@@ -1,0 +1,21 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - feliciano</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @RenderSection("style", required: false)
+    <link href="~/css/stylesheet.css" rel="stylesheet" />
+    
+</head>
+<body>
+    <div class="auth-container">
+        @RenderBody()  <!-- This will render the body of the login or register page -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @RenderSection("script", required: false)
+</body>
+</html>

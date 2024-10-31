@@ -12,8 +12,8 @@ namespace feliciano.DAL.Model
         public string Description { get; set; }
         public string Title { get; set; }
         public DateTime CreateAt { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }
         
-        public string ImageName {  get; set; }
+        public string? ImageName {  get; set; }
     }
 }

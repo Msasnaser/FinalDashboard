@@ -1,0 +1,41 @@
+﻿@model LoginVM
+
+@{
+    Layout = "~/views/shared/_layoutauth.cshtml";
+}
+
+ <div class="wrapper">
+          <div class="title">
+            Signin 
+          </div>
+    <form asp-action="Login" asp-controller="Account" method="post">
+         <div class="field">
+           <input type="text" required asp-for="Email">
+            <label asp-for="Email">Email Address</label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+         </div>
+        <div class="field">
+           <input type="password" required asp-for="Password">
+           <label asp-for ="Password">Password</label>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="content">
+         <div class="checkbox">
+            <input type="checkbox" asp-for="RememberMe">
+            <label asp-for="RememberMe">Remember me</label>
+          </div>
+         <div class="pass-link">
+          <a asp-action="ForgotPassword" asp-controller="Account">Forgot password?</a>
+         </div>
+        </div>
+         <div class="field">
+            <button type="submit" class="submit-btn">Log in</button>
+        </div>
+         <div class="signup-link">
+            Not a member?
+            <a asp-action="Register">Signup now</a>
+         </div>
+   </form>
+ </div>
+
+

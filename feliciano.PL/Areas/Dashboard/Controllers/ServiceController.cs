@@ -2,12 +2,15 @@
 using feliciano.DAL.Data;
 using feliciano.DAL.Model;
 using feliciano.PL.Areas.Dashboard.ViewModels.ServicesVM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata.Ecma335;
 
 namespace feliciano.PL.Areas.Dashboard.Controllers
 {
+   
     [Area("Dashboard")]
+    //[Authorize (Roles="Admin")]
     public class ServiceController : Controller
     {
         private readonly ApplicationDbContext context;
@@ -19,6 +22,13 @@ namespace feliciano.PL.Areas.Dashboard.Controllers
         }
         public IActionResult Index()
         {
+        //    if (!User.IsInRole("Admin"))
+        //    {
+        //        // Use RedirectToAction to navigate to Account/Login without an area
+        //        return Redirect("/Account/Login");
+        //    }
+
+
             var service = context.services.ToList();
 
             return View(mapper.Map<IEnumerable<IndexServiceVM>>(service));
@@ -27,6 +37,11 @@ namespace feliciano.PL.Areas.Dashboard.Controllers
 
         public IActionResult Create()
         {
+            //if (!User.IsInRole("Admin"))
+            //{
+            //    // Use RedirectToAction to navigate to Account/Login without an area
+            //    return Redirect("/Account/Login");
+            //}
             return View();
         }
         [HttpPost]
@@ -45,6 +60,11 @@ namespace feliciano.PL.Areas.Dashboard.Controllers
 
         public IActionResult Details(int? id)
         {
+            //if (!User.IsInRole("Admin"))
+            //{
+            //    // Use RedirectToAction to navigate to Account/Login without an area
+            //    return Redirect("/Account/Login");
+            //}
             if (id is null)
             {
                 return BadRequest();
@@ -61,6 +81,11 @@ namespace feliciano.PL.Areas.Dashboard.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
+            //if (!User.IsInRole("Admin"))
+            //{
+            //    // Use RedirectToAction to navigate to Account/Login without an area
+            //    return Redirect("/Account/Login");
+            //}
             if (id is null)
             {
                 return BadRequest();
@@ -119,6 +144,11 @@ namespace feliciano.PL.Areas.Dashboard.Controllers
         [HttpPost]
         public IActionResult DeleteConfirm(int id)
         {
+            //if (!User.IsInRole("Admin"))
+            //{
+            //    // Use RedirectToAction to navigate to Account/Login without an area
+            //    return Redirect("/Account/Login");
+            //}
             var service = context.services.Find(id);
             if (service is null)
             {

@@ -1,0 +1,70 @@
+﻿@model RegisterVM
+
+@{
+    Layout = "~/views/shared/_layoutauth.cshtml";
+}
+
+<div class="wrapper">
+    <div class="title">SignUp</div>
+    <form asp-controller="Account" asp-action="Register" method="post" id="registrationForm">
+        <div class="field">
+            <input asp-for="UserName" type="text" required>
+            <label asp-for="UserName">UserName</label>
+        </div>
+        <div class="field">
+            <input asp-for="Email" type="email" required>
+            <label asp-for="Email">Email</label>
+        </div>
+        <div class="field">
+            <input asp-for="Password" type="password" required>
+            <label asp-for="Password">Password</label>
+        </div>
+        <div class="field">
+            <input asp-for="ConfirmedPassword" type="password" required>
+            <label asp-for="ConfirmedPassword">Confirm Password</label>
+        </div>
+        <div class="field">
+            <button type="submit" class="submit-btn">Sign up</button>
+        </div>
+        <div class="signup-link">
+            Are you a member?
+            <a asp-action="Login">Signin now</a>
+        </div>
+    </form>
+</div>
+@section script {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', async function (e) {
+            e.preventDefault(); 
+            const formData = new FormData(this);
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                // Show alert on successful registration
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Registration Successful!',
+                    text: 'Please check your email to confirm your account.',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    window.location.href = '@Url.Action("Login", "Account")'; // Redirect to login
+                });
+            } else {
+                // Handle the error if appered problem in Register 
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Registration Failed',
+                    text: 'Please try again.',
+                });
+            }
+        });
+    </script>
+}
+
+
+
+
