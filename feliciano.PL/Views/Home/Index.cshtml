@@ -6,8 +6,7 @@
 	var slider = ViewData["slider"] as List<feliciano.DAL.Model.Slider>;
 
 }
-
-<link href="~/css/index.css" rel="stylesheet" />
+<link href="~/css/stylesheet1.css" rel="stylesheet" />
 
  <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
@@ -188,30 +187,6 @@
 	</div>
 </section>
 
-<section id="subscribe" class="scrollspy-section padding-small mt-5">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<figure class="subscribe-image">
-					<img src="~/images/subscribe-image.png" alt="subscribe">
-				</figure>
-			</div>
-			<div class="col-md-6">
-				<div class="subscribe-content">
-					<h2 class="section-title">subscribe us</h2>
-					<p>
-						Join our newsletter to stay updated with super discounts and amazing offers. 300+ have
-						already subscribed us.
-					</p>
-					<form id="form">
-						<input type="text" name="email" placeholder="enter your email address">
-						<button class="btn btn-accent btn-rounded btn-full btn-xlarge">Subscribe</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
 
 <section id="latest-blog" class="scrollspy-section bg-grey padding-large mt-5">
 	<div class="container">
@@ -316,17 +291,14 @@
 					item.style.display = 'none';
 				});
 
-				// Show only the portfolio items that match the selected portfolio ID
 				portfolioItems.forEach(item => {
 					if (item.getAttribute('data-portfolio-id') === portfolioId) {
-						item.style.display = 'block'; // or 'flex', depending on your layout
+						item.style.display = 'block';
 					}
 				});
 			});
 		});
 
-		// Optionally, you can show all items when the page loads
-		// document.querySelectorAll('.portfolio-item').forEach(item => item.style.display = 'block');
 	});
 
 </script>
